@@ -16,8 +16,6 @@ public class AddressBook {
     @GeneratedValue
     private Integer id = null;
 
-
-
     private String owner;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -72,6 +70,7 @@ public class AddressBook {
     public boolean equals(Object o) {
         if (!(o instanceof AddressBook)) return false;
         AddressBook ab = (AddressBook) o;
+        if (this.owner != ab.getOwner()) return false;
         if (friends.size() != ab.getSize()) return false;
         for (int i = 0; i < friends.size(); i++) {
             if (!friends.get(i).equals(ab.getFriend(i))) return false;

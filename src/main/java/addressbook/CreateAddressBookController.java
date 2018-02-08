@@ -31,6 +31,8 @@ public class CreateAddressBookController {
 
     @RequestMapping(value = "/book/add")
     public AddressBook addBuddy(@RequestParam(value = "name") String name, @RequestParam(value = "address") String address, @RequestParam(value = "number") String number) {
+        if (book == null)
+            book = new AddressBook();
         BuddyInfo b = new BuddyInfo(name, address, number);
         book.addBuddy(b);
         repo.save(book);

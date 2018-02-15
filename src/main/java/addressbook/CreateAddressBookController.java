@@ -1,6 +1,10 @@
 package addressbook;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +18,17 @@ public class CreateAddressBookController {
     @Autowired
     public CreateAddressBookController(AddressBookRepository repo) {
         this.repo = repo;
+    }
+
+    @GetMapping("/new")
+    public String createForm(Model model) {
+        model.addAttribute("book", new AddressBook());
+        return "createBook";
+    }
+
+    @PostMapping("/new")
+    public String greetingSubmit(@ModelAttribute AddressBook book) {
+        return "newBook";
     }
 
     @RequestMapping(value = "/book/find")
